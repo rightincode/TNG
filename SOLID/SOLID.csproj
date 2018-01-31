@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LSP\Violation\Customer.cs" />
+    <Compile Include="LSP\Violation\SpecialCustomers.cs" />
+    <Compile Include="LSP\Violation\TopNCustomers.cs" />
     <Compile Include="NONSR_Calculator.cs" />
     <Compile Include="NONOCP_TaxCalculator.cs" />
     <Compile Include="OCP_TaxCalculator.cs" />
