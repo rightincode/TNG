@@ -45,8 +45,8 @@
     <Compile Include="LSP\Violation\TopNCustomers.cs" />
     <Compile Include="SRP\Compliant\SR_Logger.cs" />
     <Compile Include="SRP\Violation\NONSR_Calculator.cs" />
-    <Compile Include="NONOCP_TaxCalculator.cs" />
-    <Compile Include="OCP_TaxCalculator.cs" />
+    <Compile Include="OCP\Violation\NONOCP_TaxCalculator.cs" />
+    <Compile Include="OCP\Compliant\OCP_TaxCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SRP\Compliant\SR_Calculator.cs" />
   </ItemGroup>
