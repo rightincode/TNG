@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{226DFFFA-9FB3-4083-8B77-551049723253}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SOLID</RootNamespace>
-    <AssemblyName>SOLID</AssemblyName>
+    <ProjectGuid>{9EB9A169-B559-4FCD-96E0-80C4BAA3EA8E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SOLIDDriverProg_SRP_Compliant</RootNamespace>
+    <AssemblyName>SOLIDDriverProg_SRP_Compliant</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,18 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LSP\Violation\Customer.cs" />
-    <Compile Include="LSP\Violation\SpecialCustomers.cs" />
-    <Compile Include="LSP\Violation\TopNCustomers.cs" />
-    <Compile Include="SRP\Compliant\SR_Logger.cs" />
-    <Compile Include="SRP\Violation\NONSR_Calculator.cs" />
-    <Compile Include="NONOCP_TaxCalculator.cs" />
-    <Compile Include="OCP_TaxCalculator.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SRP\Compliant\SR_Calculator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="LSP\Compliant\" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SOLID\SOLID.csproj">
+      <Project>{226dfffa-9fb3-4083-8b77-551049723253}</Project>
+      <Name>SOLID</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
