@@ -14,7 +14,7 @@ namespace SOLID.LSP.Violation
         {
             if (Count < maxCount)
             {
-                AddCustomer(obj);
+                base.AddCustomer(obj);
             }
             else
             {
