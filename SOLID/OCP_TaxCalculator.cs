@@ -8,6 +8,10 @@ namespace SOLID
 {
     class OCP_TaxCalculator
     {
+        public OCP_TaxCalculator()
+        {
+        }
+
         public abstract class TaxCalculatorBase
         {
             public decimal TotalAmount { get; set; }

@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exercises\Customer.cs" />
     <Compile Include="NONSR_Calculator.cs" />
     <Compile Include="NONOCP_TaxCalculator.cs" />
     <Compile Include="OCP_TaxCalculator.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SR_Calculator.cs" />
   </ItemGroup>
