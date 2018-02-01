@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{226DFFFA-9FB3-4083-8B77-551049723253}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SOLID</RootNamespace>
-    <AssemblyName>SOLID</AssemblyName>
+    <ProjectGuid>{7F76EDE8-723B-44CA-BAAE-B06AD462C60C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SOLIDDriverProg_LSP_Compliant</RootNamespace>
+    <AssemblyName>SOLIDDriverProg_LSP_Compliant</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,25 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LSP\Compliant\Car.cs" />
-    <Compile Include="LSP\Compliant\CustomerCollection.cs" />
-    <Compile Include="LSP\Compliant\Mustang.cs" />
-    <Compile Include="LSP\Compliant\MustangGT.cs" />
-    <Compile Include="LSP\Compliant\SpecialCustomers.cs" />
-    <Compile Include="LSP\Compliant\TopNCustomers.cs" />
-    <Compile Include="LSP\Customer.cs" />
-    <Compile Include="LSP\Violation\Mustang.cs" />
-    <Compile Include="LSP\Violation\Engine.cs" />
-    <Compile Include="LSP\Violation\SpecialCustomers.cs" />
-    <Compile Include="LSP\Violation\TopNCustomers.cs" />
-    <Compile Include="LSP\Violation\MustangGT.cs" />
-    <Compile Include="SRP\Compliant\SR_Logger.cs" />
-    <Compile Include="SRP\Violation\NONSR_Calculator.cs" />
-    <Compile Include="OCP\Violation\NONOCP_TaxCalculator.cs" />
-    <Compile Include="OCP\Compliant\OCP_TaxCalculator.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SRP\Compliant\SR_Calculator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SOLID\SOLID.csproj">
+      <Project>{226DFFFA-9FB3-4083-8B77-551049723253}</Project>
+      <Name>SOLID</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SOLID.LSP;
 using SOLID.LSP.Violation;
 
 namespace SOLIDDriverProg_LSP_Violation
@@ -11,13 +12,30 @@ namespace SOLIDDriverProg_LSP_Violation
     {
         static void Main(string[] args)
         {
-            SpecialCustomers sc = null;
-            sc = new TopNCustomers();
-            for (int i = 0; i < 10; i++)
+            //SpecialCustomers sc = null;
+            ////sc = new SpecialCustomers();
+            //sc = new TopNCustomers();
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Customer obj = new Customer();
+            //    sc.AddCustomer(obj);
+            //}
+
+            Mustang myMustang = null;
+            myMustang = new MustangGT();
+
+            myMustang.Break();
+
+            if (myMustang.Stopped == true)
             {
-                Customer obj = new Customer();
-                sc.AddCustomer(obj);
+                Console.WriteLine("Yeah, we didn't hit the wall!");
             }
+            else
+            {
+                Console.WriteLine("Dang, we died!");
+            }
+
         }
     }
 }

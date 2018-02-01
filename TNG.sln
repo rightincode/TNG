@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLIDDriverProg_LSP_Violati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLIDDriverProg_SRP_Compliant", "SOLIDDriverProg_SRP_Compliant\SOLIDDriverProg_SRP_Compliant.csproj", "{9EB9A169-B559-4FCD-96E0-80C4BAA3EA8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLIDDriverProg_LSP_Compliant", "SOLIDDriverProg_LSP_Compliant\SOLIDDriverProg_LSP_Compliant.csproj", "{7F76EDE8-723B-44CA-BAAE-B06AD462C60C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9EB9A169-B559-4FCD-96E0-80C4BAA3EA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EB9A169-B559-4FCD-96E0-80C4BAA3EA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EB9A169-B559-4FCD-96E0-80C4BAA3EA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F76EDE8-723B-44CA-BAAE-B06AD462C60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F76EDE8-723B-44CA-BAAE-B06AD462C60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F76EDE8-723B-44CA-BAAE-B06AD462C60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F76EDE8-723B-44CA-BAAE-B06AD462C60C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

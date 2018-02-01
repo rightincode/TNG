@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOLID.LSP.Violation
+namespace SOLID.LSP
 {
     public class Customer
     {
