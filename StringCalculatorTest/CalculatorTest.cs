@@ -16,11 +16,12 @@ namespace StringCalculatorTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
         public void AddNullParameter()
         {
             string input = null;
-            int result = calc.Add(input);
+
+            Action<string> action = (string num) => calc.Add(num);
+            Assert.ThrowsException<NullReferenceException>(() => calc.Add(input));
         }
 
         [TestMethod]
@@ -60,11 +61,11 @@ namespace StringCalculatorTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void AddTooManyValues()
         {
             string input = "1,2,3";
-            int result = calc.Add(input);
+
+            Assert.ThrowsException<Exception>(() => calc.Add(input));
         }
     }
 }

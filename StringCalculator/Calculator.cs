@@ -6,10 +6,11 @@ namespace StringCalculator
 {
     public class Calculator
     {
+        public string parameterException = "Recieved more than 2 input parameters";
+
         public int Add(string numbers)
         {
             int result;
-            string parameterException = "Recieved more than 2 input parmaeters";
             try
             {
                 if (string.IsNullOrEmpty(numbers))
