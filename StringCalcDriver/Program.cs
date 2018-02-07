@@ -10,7 +10,7 @@ namespace StringCalcDriver
             var calc = new Calculator();
             Console.WriteLine("Please enter equation.");
             string s1 = Console.ReadLine();
-            Console.WriteLine(calc.Add(s1));
+            Console.WriteLine(calc.AddTwoOrLessInputs(s1));
             Console.Read();
         }
     }

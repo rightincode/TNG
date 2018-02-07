@@ -15,7 +15,7 @@ namespace TDDStringCalcTest
                 Equation = null
             };
 
-            Assert.AreEqual(0, calculator.Add(calculator.Equation));
+            Assert.AreEqual(0, calculator.AddTwoOrLessInputs(calculator.Equation));
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace TDDStringCalcTest
                 Equation = ""
             };
 
-            Assert.AreEqual(0, calculator.Add(calculator.Equation));
+            Assert.AreEqual(0, calculator.AddTwoOrLessInputs(calculator.Equation));
 
         }
 
@@ -38,7 +38,7 @@ namespace TDDStringCalcTest
                 Equation = "1"
             };
 
-            Assert.AreEqual(1, calculator.Add(calculator.Equation));
+            Assert.AreEqual(1, calculator.AddTwoOrLessInputs(calculator.Equation));
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace TDDStringCalcTest
                 Equation = "1,2"
             };
 
-            Assert.AreEqual(3, calculator.Add(calculator.Equation));
+            Assert.AreEqual(3, calculator.AddTwoOrLessInputs(calculator.Equation));
         }
 
         [TestMethod]
@@ -60,18 +60,40 @@ namespace TDDStringCalcTest
                 Equation = "0,2"
             };
 
-            Assert.AreEqual(2, calculator.Add(calculator.Equation));
+            Assert.AreEqual(2, calculator.AddTwoOrLessInputs(calculator.Equation));
         }
 
         [TestMethod]
-        public void AdditionWithDoubleDigitNumber()
+        public void AdditionWithMultipleDigitNumber()
         {
             var calculator = new Calculator()
             {
                 Equation = "10,2"
             };
 
-            Assert.AreEqual(12, calculator.Add(calculator.Equation));
+            Assert.AreEqual(12, calculator.AddTwoOrLessInputs(calculator.Equation));
+        }
+
+        [TestMethod]
+        public void AdditionWithTooManyInputs()
+        {
+            var calculator = new Calculator()
+            {
+                Equation = "1,2,3"
+            };
+
+            Assert.ThrowsException<Exception>(() => calculator.AddTwoOrLessInputs(calculator.Equation));
+        }
+
+        [TestMethod]
+        public void AdditionWithLetters()
+        {
+            var calculator = new Calculator()
+            {
+                Equation = "a,b,c"
+            };
+
+            Assert.ThrowsException<Exception>(() => calculator.AddTwoOrLessInputs(calculator.Equation));
         }
     }
 }

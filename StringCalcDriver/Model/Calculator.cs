@@ -15,15 +15,32 @@ namespace TDDStringCalcDriver
             set { equation = value; }
         }
 
-        public int Add(string numbers)
+        public int AddTwoOrLessInputs(string numbers)
         {
+            int isValid;
+            string[] numberArray;
+
             if (string.IsNullOrEmpty(numbers))
             {
                 return 0;
             }
 
-            string[] numberArray = numbers.Split(",");
-            return numberArray.Sum(x => int.Parse(x));
+            numberArray = numbers.Split(",");
+
+            bool containOnlyNumbers = int.TryParse(numberArray[0], out isValid);
+            if (!containOnlyNumbers)
+            {
+                throw new Exception("Invalid user input.");
+            }
+
+            if (numberArray.Length > 2)
+            {
+                throw new Exception("Too many inputs, please limit to 2.");
+            }
+            else
+            {
+                return numberArray.Sum(x => int.Parse(x));
+            }
         }
     }
 }
