@@ -10,6 +10,9 @@ namespace StringCalculator
         {
             if (numbers == null)
             {
+                return -1;
+            }else if(numbers == "")
+            {
                 return 0;
             }
             else
@@ -29,16 +32,22 @@ namespace StringCalculator
                 return count;
             }
         }
-
+        /// <summary>
+        /// Parser Method
+        /// Takes in one string parameter "numbers". This is the same value as the calling method's string parameter. This method is responsible for parsing that string and populating an array with the comma delimited integer values, which it returns to the caller. 
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns> int array </returns>
         public int[] Parser(string numbers)
         {
-            int[] numList = new int[2];
-            
-            if (numbers.Contains(","))
-            {
-                string[] stringArr = numbers.Split(',');
 
-                if(stringArr.Length > 2)
+            int[] numList;
+
+            if (numbers.Contains(",") || numbers.Contains("\n"))
+            {
+                string[] stringArr = numbers.Split(new char[] { ',', '\n' });
+
+                if(stringArr.Length < 1)
                 {
                     return new int[0];
                 }
@@ -46,21 +55,20 @@ namespace StringCalculator
                 {
                     try
                     {
+                        numList = new int[stringArr.Length];
                         int i = 0;
                         foreach(string index in stringArr)
                         {
                             numList[i] = Int32.Parse(index);
                             i++;
                         }
-
                     }
                     catch
                     {
                         Console.WriteLine("Invalid Entry!");
-                        return numList;
+                        return new int[0];
                     }
                     return numList;
-                   
                 }
             }
             else
@@ -68,13 +76,15 @@ namespace StringCalculator
                 try
                 {
                     int singleNumber = Int32.Parse(numbers);
+                    numList = new int[1];
                     numList[0] = singleNumber;
                     return numList;
                 }
                 catch
                 {
+                    
                     Console.WriteLine("Invalid Input!");
-                    return numList;
+                    return new int[0];
 
                 }
 
