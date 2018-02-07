@@ -1,4 +1,5 @@
 ﻿using System;
+using TDDStringCalcDriver;
 
 namespace StringCalcDriver
 {
@@ -6,7 +7,11 @@ namespace StringCalcDriver
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var calc = new Calculator();
+            Console.WriteLine("Please enter equation.");
+            string s1 = Console.ReadLine();
+            Console.WriteLine(calc.Add(s1));
+            Console.Read();
         }
     }
 }
