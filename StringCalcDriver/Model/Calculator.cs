@@ -7,7 +7,7 @@ namespace TDDStringCalcDriver
 {
     public class Calculator
     {
-        public string equation;
+        private string equation;
 
         public string Equation
         {
@@ -22,8 +22,8 @@ namespace TDDStringCalcDriver
                 return 0;
             }
 
-            var equation = numbers.Split(",");
-            return equation.Sum(x => int.Parse(x));
+            string[] numberArray = numbers.Split(",");
+            return numberArray.Sum(x => int.Parse(x));
         }
     }
 }

@@ -12,10 +12,10 @@ namespace TDDStringCalcTest
         {
             var calculator = new Calculator()
             {
-                equation = null
+                Equation = null
             };
 
-            Assert.AreEqual(0, calculator.Add(calculator.equation));
+            Assert.AreEqual(0, calculator.Add(calculator.Equation));
         }
 
         [TestMethod]
@@ -23,10 +23,10 @@ namespace TDDStringCalcTest
         {
             var calculator = new Calculator()
             {
-                equation = ""
+                Equation = ""
             };
 
-            Assert.AreEqual(0, calculator.Add(calculator.equation));
+            Assert.AreEqual(0, calculator.Add(calculator.Equation));
 
         }
 
@@ -35,10 +35,10 @@ namespace TDDStringCalcTest
         {
             var calculator = new Calculator()
             {
-                equation = "1"
+                Equation = "1"
             };
 
-            Assert.AreEqual(1, calculator.Add(calculator.equation));
+            Assert.AreEqual(1, calculator.Add(calculator.Equation));
         }
 
         [TestMethod]
@@ -46,10 +46,32 @@ namespace TDDStringCalcTest
         {
             var calculator = new Calculator()
             {
-                equation = "1,2"
+                Equation = "1,2"
             };
 
-            Assert.AreEqual(3, calculator.Add(calculator.equation));
+            Assert.AreEqual(3, calculator.Add(calculator.Equation));
+        }
+
+        [TestMethod]
+        public void AdditionWithZeroAsANumber()
+        {
+            var calculator = new Calculator()
+            {
+                Equation = "0,2"
+            };
+
+            Assert.AreEqual(2, calculator.Add(calculator.Equation));
+        }
+
+        [TestMethod]
+        public void AdditionWithDoubleDigitNumber()
+        {
+            var calculator = new Calculator()
+            {
+                Equation = "10,2"
+            };
+
+            Assert.AreEqual(12, calculator.Add(calculator.Equation));
         }
     }
 }
