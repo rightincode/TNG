@@ -109,5 +109,15 @@ namespace CalculatorTests
             var result = myCalc.Add("-123,22,\n44,5");
             Assert.AreEqual(-52, result);
         }
+
+        [TestMethod]
+        public void TestParserReturn()
+        {
+            int[] expected = new int[] { -123, 22, 0, 44, 5 };
+            var myParser = new CalculatorProgram.CalcInputParser();
+            var result = myParser.ParseStringInputToAddends("-123,22,\n44,5");
+            Assert.AreEqual(expected, result);
+        }
+
     }
 }

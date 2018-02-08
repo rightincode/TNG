@@ -7,6 +7,14 @@ namespace CalculatorProgram
     public class Calculator
     {
         private int sum;
+        private int[] addends;
+
+        public int[] Addends
+        {
+            get { return addends; }
+            set { addends = value; }
+        }
+
 
         public int Sum
         {
@@ -17,51 +25,23 @@ namespace CalculatorProgram
         public int Add(string stuffToAdd = "")
         //obviously not SOLID, minimum done to get tests green
         {
-            string[] splitParams;
-            //business rule: if empty string return 0
-            if (stuffToAdd.Length == 0)
+            try
             {
-                return 0;
+                CalcInputParser myParser = new CalcInputParser();
+                addends = myParser.ParseStringInputToAddends(stuffToAdd);
             }
-            //business rule: if single number, return that number
-            else if (!stuffToAdd.Contains(",") && !stuffToAdd.Contains("\n"))
+            catch (ArgumentException exception)
             {
-                bool result = Int32.TryParse(stuffToAdd, out sum);
-                if (result)
-                {
-                    return sum;
-                }
-                else
-                {
-                    throw new ArgumentException("Invalid user input");
-                }
+                throw exception;
             }
-            //otherwise add the numbers (and throw out if contains NaN value)
-            else
+            Console.WriteLine(addends);
+
+            for (int i = 0; i < addends.Length; i++)
             {
+                sum += addends[i];
+            }
                 
-                if (stuffToAdd.Contains("\n"))
-                {
-                    stuffToAdd = stuffToAdd.Replace("\n", ",");
-                }
-                splitParams = stuffToAdd.Split(",");
-                for (int i = 0; i < splitParams.Length; i++)
-                {
-                    if(splitParams[i] == "")
-                    {
-                        splitParams[i] = "0";
-                    }
-                    bool result = Int32.TryParse(splitParams[i], out int addend);
-                    if (!result)
-                    {
-                        throw new ArgumentException("Invalid user input");
-                    }
-                    sum += addend;
-                }
-                
-                return sum;
-            }
-            
+            return sum;
         }
     }
 }
