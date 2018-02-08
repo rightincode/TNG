@@ -15,11 +15,11 @@ namespace CalculatorTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.ArgumentException))]
-        public void TooManyArgs()
+        public void ReturnZeroForNullInput()
         {
             var myCalc = new CalculatorProgram.Calculator();
-            myCalc.Add("1,2,3");
+            var result = myCalc.Add();
+            Assert.AreEqual(0, result);
         }
 
         [TestMethod]
@@ -79,27 +79,35 @@ namespace CalculatorTests
         }
 
         [TestMethod]
-        public void AddOneNegativeParamToZero()
-        {
-            var myCalc = new CalculatorProgram.Calculator();
-            var result = myCalc.Add("0,-22");
-            Assert.AreEqual(-22, result);
-        }
-
-        [TestMethod]
-        public void AddPositiveAndNegativeReturnPositive()
-        {
-            var myCalc = new CalculatorProgram.Calculator();
-            var result = myCalc.Add("123,-22");
-            Assert.AreEqual(101, result);
-        }
-
-        [TestMethod]
         public void AddPositiveAndNegativeReturnNegative()
         {
             var myCalc = new CalculatorProgram.Calculator();
             var result = myCalc.Add("-123,22");
             Assert.AreEqual(-101, result);
+        }
+
+        [TestMethod]
+        public void AddThreeNegativeNumbers()
+        {
+            var myCalc = new CalculatorProgram.Calculator();
+            var result = myCalc.Add("-123,-1,-54");
+            Assert.AreEqual(-178, result);
+        }
+
+        [TestMethod]
+        public void AddFourNumbersWithNewLineAndCommas()
+        {
+            var myCalc = new CalculatorProgram.Calculator();
+            var result = myCalc.Add("-123,22\n44,5");
+            Assert.AreEqual(-52, result);
+        }
+
+        [TestMethod]
+        public void AddMultipleNumbersIncludingEmptyValue()
+        {
+            var myCalc = new CalculatorProgram.Calculator();
+            var result = myCalc.Add("-123,22,\n44,5");
+            Assert.AreEqual(-52, result);
         }
     }
 }
