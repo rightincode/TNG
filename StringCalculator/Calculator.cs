@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,8 @@ namespace StringCalculator
 {
     public class Calculator
     {
-        public string parameterException = "Recieved more than 2 input parameters";
+        public readonly string NullExceptionMessage = "Invalid Input: Input needed";
+        public readonly string ParameterException = "Invalid Input: Can only be Signed Numeric characters";
 
         public int Add(string numbers)
         {
@@ -15,43 +17,48 @@ namespace StringCalculator
             {
                 if (string.IsNullOrEmpty(numbers))
                 {
-                    if (numbers.Equals(string.Empty))
-                    {
-                        result = 0;
-                    }
-                    else
-                    {
-                        throw new NullReferenceException();
-                    }
+                    result = numbers != null ? 0 : throw new NullReferenceException(NullExceptionMessage);
                 }
                 else
                 {
-                    string[] parsedNumbers;
-                    numbers.Replace(" ", string.Empty);
-                    char parseValue = ',';
-                    parsedNumbers = numbers.Split(parseValue, StringSplitOptions.None);
+                    // NOT SOLID
+                    //string[] parsedNumbers;
+                    //numbers.Replace(" ", string.Empty);
+                    //string[] parseValue = new string[] { ",", "/n" };
+                    //parsedNumbers = numbers.Split(parseValue, StringSplitOptions.None);
+                    //result = parsedNumbers.Where(x => x.Length > 0).Select(int.Parse).ToArray().Sum();
 
-                    switch (parsedNumbers.Length)
-                    {
-                        case 1:
-                            result = int.Parse(parsedNumbers[0]);
-                            break;
-                        case 2:
-                            result = int.Parse(parsedNumbers[0]) + int.Parse(parsedNumbers[1]);
-                            break;
-                        default:
-                            throw new Exception(parameterException);
-
-                    }
+                    // WITH SOLID
+                    result = Parse(numbers).Sum();
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
 
             return result;
+        }
+
+        public int[] Parse(string numbers)
+        {
+            int[] numArray;
+
+            try
+            {
+                string[] parsedNumbers;
+                numbers.Replace(" ", string.Empty);
+                string[] parseValue = new string[] { ",", "/n" };
+                parsedNumbers = numbers.Split(parseValue, StringSplitOptions.None);
+                numArray = parsedNumbers.Where(x => x.Length > 0).Select(int.Parse).ToArray();
+
+            }
+            catch (FormatException)
+            {
+                throw new FormatException(ParameterException);
+            }
+
+            return numArray;
         }
     }
 }
