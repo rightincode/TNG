@@ -6,6 +6,7 @@ namespace StringCalculator
 {
     public class Calculations
     {
+        Parser parser = new Parser();
         public int Add(string numbers)
         {
             if (numbers == null)
@@ -17,80 +18,19 @@ namespace StringCalculator
             }
             else
             {
-                int[] myAddArray = Parser(numbers);
+                int[] myAddArray = parser.StringParser(numbers);
                 if(myAddArray == null || myAddArray.Length == 0)
                 {
                     return -1;
                 }
-
-                int count = 0;
-                foreach(int index in myAddArray)
+                int sum = 0;
+                foreach(int currentValue in myAddArray)
                 {
-                    count = count + index;
-
+                    sum = sum + currentValue;
                 }
-                return count;
+                return sum;
             }
         }
-        /// <summary>
-        /// Parser Method
-        /// Takes in one string parameter "numbers". This is the same value as the calling method's string parameter. This method is responsible for parsing that string and populating an array with the comma delimited integer values, which it returns to the caller. 
-        /// </summary>
-        /// <param name="numbers"></param>
-        /// <returns> int array </returns>
-        public int[] Parser(string numbers)
-        {
-
-            int[] numList;
-
-            if (numbers.Contains(",") || numbers.Contains("\n"))
-            {
-                string[] stringArr = numbers.Split(new char[] { ',', '\n' });
-
-                if(stringArr.Length < 1)
-                {
-                    return new int[0];
-                }
-                else
-                {
-                    try
-                    {
-                        numList = new int[stringArr.Length];
-                        int i = 0;
-                        foreach(string index in stringArr)
-                        {
-                            numList[i] = Int32.Parse(index);
-                            i++;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Invalid Entry!");
-                        return new int[0];
-                    }
-                    return numList;
-                }
-            }
-            else
-            {
-                try
-                {
-                    int singleNumber = Int32.Parse(numbers);
-                    numList = new int[1];
-                    numList[0] = singleNumber;
-                    return numList;
-                }
-                catch
-                {
-                    
-                    Console.WriteLine("Invalid Input!");
-                    return new int[0];
-
-                }
-
-            }
-        }
-
     }
 }
 

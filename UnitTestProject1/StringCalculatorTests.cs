@@ -100,12 +100,54 @@ namespace UnitTestProject1
             Assert.AreEqual(-1, myCalculations.Add("TYLER"));
         }
 
+        [TestMethod]
+        public void AddNegativeValuesWithCommasAndNewLines()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(-5, myCalculations.Add("5,5\n5\n5,-5,-5\n-5,-5\n-5,0\n0"));
+        }
+        [TestMethod]
+        public void AddInvalidStringAfterValidString()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(-1, myCalculations.Add("20,20,tyler"));
+        }
 
+        /// TEST SUITE 3 ///
 
+        [TestMethod]
+        public void AddNumberGreaterThanOneThousand()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(111, myCalculations.Add("1,10,100,1000"));
+        }
 
+        [TestMethod]
+        public void AddCustomDelimiter()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(42, myCalculations.Add("//!\n1!34!12!5"));
+        }
 
+        [TestMethod]
+        public void InvalidCustomDelimiter()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(-1, myCalculations.Add("//5\n656526"));
+        }
 
+        [TestMethod]
+        public void CustomDelimeterAndCommaImproperUsage()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(-1, myCalculations.Add("//!\n5,5,5,5,5"));
+        }
 
-
+        [TestMethod]
+        public void CustomDelimeterAddingOneThousand()
+        {
+            Calculations myCalculations = new Calculations();
+            Assert.AreEqual(15, myCalculations.Add("//[\n5[5[1000[5"));
+        }
     }
 }
