@@ -15,7 +15,7 @@ namespace TDDStringCalcDriver
             set { equation = value; }
         }
 
-        public int AddTwoOrLessInputs(string numbers)
+        public int Add(string numbers)
         {
             int isValid;
             string[] numberArray;
@@ -24,18 +24,12 @@ namespace TDDStringCalcDriver
             {
                 return 0;
             }
-
-            numberArray = numbers.Split(",");
+             numberArray = numbers.Split(new char[] { ',', '\n' });
 
             bool containOnlyNumbers = int.TryParse(numberArray[0], out isValid);
             if (!containOnlyNumbers)
             {
                 throw new Exception("Invalid user input.");
-            }
-
-            if (numberArray.Length > 2)
-            {
-                throw new Exception("Too many inputs, please limit to 2.");
             }
             else
             {
