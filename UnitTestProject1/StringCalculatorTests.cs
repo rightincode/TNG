@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StringCalculator;
+using System;
 
 namespace UnitTestProject1
 {
@@ -126,28 +127,49 @@ namespace UnitTestProject1
         public void AddCustomDelimiter()
         {
             Calculations myCalculations = new Calculations();
-            Assert.AreEqual(42, myCalculations.Add("//!\n1!34!12!5"));
+            Assert.AreEqual(52, myCalculations.Add(@"//!\n1!34!12!5"));
         }
 
         [TestMethod]
         public void InvalidCustomDelimiter()
         {
             Calculations myCalculations = new Calculations();
-            Assert.AreEqual(-1, myCalculations.Add("//5\n656526"));
+            Assert.AreEqual(-1, myCalculations.Add(@"//5\n656526"));
         }
 
         [TestMethod]
         public void CustomDelimeterAndCommaImproperUsage()
         {
             Calculations myCalculations = new Calculations();
-            Assert.AreEqual(-1, myCalculations.Add("//!\n5,5,5,5,5"));
+            Assert.AreEqual(-1, myCalculations.Add(@"//!\n5,5,5,5,5"));
         }
 
         [TestMethod]
         public void CustomDelimeterAddingOneThousand()
         {
             Calculations myCalculations = new Calculations();
-            Assert.AreEqual(15, myCalculations.Add("//[\n5[5[1000[5"));
+            Assert.AreEqual(15, myCalculations.Add(@"//[\n5[5[1000[5"));
         }
+
+        [TestMethod]
+        public void TestIsCustomDelimeterFunctionality()
+        {
+            Parser parser = new Parser();
+            Assert.IsTrue(parser.IsCustomDelimeter(@"//!\n"));
+        }
+        [TestMethod]
+        public void TestInvalidInputCustomDelimeterOnly()
+        {
+            Calculations calculations = new Calculations();
+            Assert.AreEqual(-1, calculations.Add(@"//!\n"));
+        }
+
+        [TestMethod]
+        public void TestInvalidInputCustomDelimeterNumber()
+        {
+            Calculations calculations = new Calculations();
+            Assert.AreEqual(-1, calculations.Add(@"//5\n7523565"));
+        }
+
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StringCalculator
 {
-    class Parser
+    public class Parser
     {
         /// <summary>
         /// Parser Method
@@ -12,57 +12,71 @@ namespace StringCalculator
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns> int array </returns>
-        public int[] StringParser(string numbers)
+        public int[] StringParserDefault(string numbers, char delimiter = '1')
         {
-
             int[] numList;
-
-            if (numbers.Contains(",") || numbers.Contains("\n"))
+            string[] stringArr;
+            if(delimiter == '1')
             {
-                string[] stringArr = numbers.Split(new char[] { ',', '\n' });
+                stringArr = numbers.Split(new char[] { ',', '\n' });
 
-                if (stringArr.Length < 1)
-                {
-                    return new int[0];
-                }
-                else
-                {
-                    try
-                    {
-                        numList = new int[stringArr.Length];
-                        int i = 0;
-                        foreach (string index in stringArr)
-                        {
-                            numList[i] = Int32.Parse(index);
-                            i++;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Invalid Entry!");
-                        return new int[0];
-                    }
-                    return numList;
-                }
+            }
+            else
+            {
+                stringArr = numbers.Split(delimiter);
+            }
+
+            if (stringArr.Length < 1)
+            {
+                return new int[0];
             }
             else
             {
                 try
                 {
-                    int singleNumber = Int32.Parse(numbers);
-                    numList = new int[1];
-                    numList[0] = singleNumber;
-                    return numList;
+                    numList = new int[stringArr.Length];
+                    int i = 0;
+                    foreach (string index in stringArr)
+                    {
+                        numList[i] = Int32.Parse(index);
+                        i++;
+                    }
                 }
                 catch
                 {
-                    Console.WriteLine("Invalid Input!");
+                    Console.WriteLine("Invalid Entry!");
                     return new int[0];
                 }
-
+                return numList;
             }
+        }
 
+
+
+
+
+
+        public bool IsCustomDelimeter(string numbers)
+        {
+            bool isCustomDelimetor;
+            try
+            {
+                if (numbers.Length >= 4 && numbers.Substring(0, 2).Equals("//") && numbers.Substring(3, 2).Equals(@"\n") && !Char.IsNumber(numbers[2]))
+                {
+                    isCustomDelimetor = true;
+                }
+                else
+                {
+                    isCustomDelimetor = false;
+                }
+                return isCustomDelimetor;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
 }
+
