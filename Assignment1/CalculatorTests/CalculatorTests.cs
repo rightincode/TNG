@@ -119,5 +119,29 @@ namespace CalculatorTests
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void DefaultDelimiter()
+        {
+            var myCalc = new CalculatorProgram.Calculator();
+            var result = myCalc.Add("-123,22,\n44,5");
+            Assert.AreEqual(-52, result);
+        }
+
+        [TestMethod]
+        public void CustomDelimiter()
+        {
+            var myCalc = new CalculatorProgram.Calculator();
+            var result = myCalc.Add("//y\n-123y22y\n44y5");
+            Assert.AreEqual(-52, result);
+        }
+
+        [TestMethod]
+        public void AddNumberGreaterThanOneThousand()
+        {
+            var myCalc = new CalculatorProgram.Calculator();
+            var result = myCalc.Add("1123,22,2044,5");
+            Assert.AreEqual(194, result);
+        }
+
     }
 }

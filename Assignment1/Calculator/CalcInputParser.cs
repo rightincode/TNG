@@ -6,6 +6,14 @@ namespace CalculatorProgram
 {
     public class CalcInputParser
     {
+        private string delimiter;
+
+        public string Delimiter
+        {
+            get { return delimiter; }
+            set { delimiter = value; }
+        }
+
         private int[] addends;
 
         public int[] Addends
@@ -16,46 +24,135 @@ namespace CalculatorProgram
 
         public int[] ParseStringInputToAddends(string input = "")
         {
-            if (input == "")
+            //business rule: if empty string, return 0
+            if(CheckForEmptyInput(input))
             {
-                addends = new int[] { 0 };
+                addends = new int[1];
+                addends[0] = 0;
             }
-            else if (!input.Contains(",") && !input.Contains("\n"))
+
+            //business rule: if single addend (no delimiters) return that addend
+            else if(!CheckForCustomDelimiter(input) && !CheckForDefaultDelimiter(input))
             {
                 addends = new int[1];
                 bool result = Int32.TryParse(input, out addends[0]);
                 if (!result)
                 {
-                    throw new ArgumentException("Invalid user input");
+                    throw new ArgumentException("trash input");
                 }
+            }
+
+            //business rule: allow user to input custom delimiters to separate inputs
+            else if (CheckForCustomDelimiter(input))
+            {
+                delimiter = input[2].ToString();
+                input = input.Substring(4);
+                string[] tempStrings = SplitOnDelimiterAndLineBreak(input, delimiter);
+                addends = new int[tempStrings.Length];
+                addends = ParseStringArrayAndCheckForTrash(tempStrings);
+
+            }
+
+            //but don't require it, set default delimiter to ";"
+            else
+            {
+                delimiter = ",";
+                string[] tempStrings = SplitOnDelimiterAndLineBreak(input, delimiter);
+                addends = new int[tempStrings.Length];
+                addends = ParseStringArrayAndCheckForTrash(tempStrings);
+            }
+
+            addends = ChangeAllAddendsToMaxThreeDigits(addends);
+            Console.WriteLine(addends);
+            return addends;
+        }
+
+        private bool CheckForEmptyInput(string input)
+        {
+            if(input == "")
+            {
+                return true;
             }
             else
             {
+                return false;
+            }
+        }
+        
+        private bool CheckForCustomDelimiter(string input)
+        {
+            if(input[0] == '/')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-                if (input.Contains("\n"))
+        private bool CheckForDefaultDelimiter(string input)
+        {
+            if (input.Contains(","))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        private string[] SplitOnDelimiterAndLineBreak(string input, string delimiter)
+        {
+            input = input.Replace("\n", delimiter);
+            return input.Split(delimiter);
+        }
+        private int[] ParseStringArrayAndCheckForTrash(string[] input)
+        {
+            int[] results = new int[input.Length];
+
+            for(int i = 0; i < input.Length; i++)
+            {
+                if(input[i] == "")
                 {
-                    input = input.Replace("\n", ",");
+                    input[i] = "0";
                 }
 
-                string[] splitParams = input.Split(",");
-                addends = new int[splitParams.Length];
-
-                for (int i = 0; i < splitParams.Length; i++)
+                bool success = Int32.TryParse(input[i], out results[i]);
+                if (!success)
                 {
-                    if (splitParams[i] == "")
-                    {
-                        splitParams[i] = "0";
-                    }
-                    bool result = Int32.TryParse(splitParams[i], out addends[i]);
-                    if (!result)
-                    {
-                        throw new ArgumentException("Invalid user input");
-                    }
+                    throw new ArgumentException("trash input");
                 }
             }
 
-            Console.WriteLine("The addends are: " + addends);
-            return addends;
+            return results;
         }
+        
+        private int[] ChangeAllAddendsToMaxThreeDigits(int[] oldAddends)
+        {
+            int[] newAddends = new int[oldAddends.Length];
+            for(int i = 0; i < oldAddends.Length; i++)
+            {
+                string tempString = oldAddends[i].ToString();
+                if(tempString.Length > 3)
+                {
+                    if (tempString.Contains("-"))
+                    {
+                        tempString = tempString.Substring(tempString.Length - 4);
+                    }
+                    else
+                    {
+                        tempString = tempString.Substring(tempString.Length - 3);
+                    }
+                    Console.WriteLine(tempString);
+                }
+                newAddends[i] = Int32.Parse(tempString);
+            }
+
+            Console.WriteLine(newAddends);
+            return newAddends;
+        }
+
     }
 }
