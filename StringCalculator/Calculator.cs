@@ -9,6 +9,7 @@ namespace StringCalculator
     {
         public readonly string NullExceptionMessage = "Invalid Input: Input needed";
         public readonly string ParameterException = "Invalid Input: Can only be Signed Numeric characters";
+        public readonly string DelimiterExceptionMessage = "Invalid Input: Delimiter can not be characters associated with numeric values";
 
         public int Add(string numbers)
         {
@@ -29,33 +30,52 @@ namespace StringCalculator
                     //result = parsedNumbers.Where(x => x.Length > 0).Select(int.Parse).ToArray().Sum();
 
                     // WITH SOLID
-                    result = Parse(numbers).Sum();
+                    result = Parse(numbers).Where(x => x < 1001).Sum();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
+                result = new int();
             }
 
             return result;
         }
 
-        public int[] Parse(string numbers)
+        public int[] Parse(string fullInput)
         {
             int[] numArray;
+            string[] parseValue;
+            string varyInput;
 
             try
             {
+                fullInput.Replace(" ", string.Empty);
+
+                if (fullInput.Length > 1 && fullInput.Substring(0,2) == "//")
+                {
+                    int lineIndex = fullInput.IndexOf(@"\n") + 1;
+                    varyInput = fullInput.Substring(lineIndex, fullInput.Length - lineIndex);
+                    parseValue = new string[] { fullInput.Substring(2, 1) };
+
+                    if (parseValue.First().Equals("-") || int.TryParse(parseValue.First(), out int temp))
+                        throw new FormatException(DelimiterExceptionMessage);
+
+                }
+                else
+                {
+                    parseValue = new string[] { ",", @"\n" };
+                    varyInput = fullInput;
+                }
+
                 string[] parsedNumbers;
-                numbers.Replace(" ", string.Empty);
-                string[] parseValue = new string[] { ",", "/n" };
-                parsedNumbers = numbers.Split(parseValue, StringSplitOptions.None);
+                parsedNumbers = varyInput.Split(parseValue, StringSplitOptions.None);
                 numArray = parsedNumbers.Where(x => x.Length > 0).Select(int.Parse).ToArray();
 
             }
-            catch (FormatException)
+            catch (Exception ex)
             {
-                throw new FormatException(ParameterException);
+                throw ex;
             }
 
             return numArray;
