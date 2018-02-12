@@ -42,7 +42,7 @@ namespace StringCalculator
             return result;
         }
 
-        public int[] Parse(string fullInput)
+        private int[] Parse(string fullInput)
         {
             int[] numArray;
             string[] parseValue;
